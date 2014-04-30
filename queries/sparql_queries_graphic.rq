@@ -1,0 +1,14 @@
+###########################
+# SPARQL QUERY COLLECTION #
+###########################
+# VISO-GRAPHIC ############
+###########################
+
+# Classes in viso-graphic
+###################################################
+SELECT DISTINCT ?subjectLabel
+FROM viso-graphic:
+WHERE {
+	?subject rdfs:subClassOf* viso-graphic:Abstract_Thing . 
+	?subject rdfs:label ?subjectLabel
+}

@@ -1,0 +1,16 @@
+###########################
+# SPARQL QUERY COLLECTION #
+###########################
+# VISO-MAIN ###############
+###########################
+
+
+# Compare usage of multiple properties
+###################################################
+SELECT *
+WHERE {
+   {?subject ?p ?problem }
+	UNION 
+	{?problem ?p ?object}
+	BIND (viso-graphic:shape_named AS ?problem)
+}

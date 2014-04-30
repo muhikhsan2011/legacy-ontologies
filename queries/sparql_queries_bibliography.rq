@@ -1,0 +1,52 @@
+###########################
+# SPARQL QUERY COLLECTION #
+###########################
+# VISO-BIBLIOGRAPHY #######
+###########################
+
+
+# Documents withs Creator | Titel
+###########################
+SELECT ?d ?a ?t
+WHERE {
+?d dcterms:creator ?a .
+?d dcterms:title ?t.
+}
+
+
+# Creators of multiple subjects
+###########################
+SELECT DISTINCT ?creator
+WHERE {
+    ?subject dcterms:creator ?creator .
+	?anothersubject dcterms:creator ?creator.
+	FILTER (?subject != ?anothersubject)
+}
+
+
+
+# Overview
+###################################################
+SELECT DISTINCT ?document ?creator ?date
+WHERE {
+    ?document rdf:type/(rdfs:subClassOf)* bibo:Document .
+      ?document ((dct:isPartOf))*/dct:creator ?creator .
+    OPTIONAL {
+        ?document ((dct:isPartOf))*/dct:date ?date .
+    } .
+}
+
+# Missing (direct) Date (Date may be set for the containing Book etc.)
+###################################################
+SELECT DISTINCT ?document ?title ?creator ?date
+WHERE {
+    ?document rdf:type/(rdfs:subClassOf)* bibo:Document .
+    ?document (dcterms:isPartOf)*/dcterms:creator ?creator .
+    OPTIONAL {
+        ?document dcterms:title ?title .
+    } .    
+OPTIONAL {
+        ?document (dcterms:isPartOf)*/dcterms:date ?date .
+    } .
+	NOT EXISTS {?document dcterms:date ?directDate}
+}

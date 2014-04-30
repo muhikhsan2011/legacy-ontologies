@@ -1,0 +1,736 @@
+# Saved by TopBraid on Wed Jan 09 15:37:30 CET 2013
+# baseURI: http://purl.org/viso/queries/
+# imports: http://purl.org/viso/bibliography/
+# imports: http://purl.org/viso/annotated/
+# imports: http://spinrdf.org/spin
+
+@prefix :        <http://purl.org/viso/queries/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sp:      <http://spinrdf.org/sp#> .
+@prefix spin:    <http://spinrdf.org/spin#> .
+@prefix spl:     <http://spinrdf.org/spl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+:     rdf:type owl:Ontology ;
+      owl:imports <http://spinrdf.org/spin> , <http://purl.org/viso/bibliography/> , <http://purl.org/viso/annotated/> ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+:ListAllBinaryGraphicO2ORelationsOfTypeX
+      rdf:type spin:SelectTemplate ;
+      rdfs:label "List all visual relations x"^^xsd:string ;
+      rdfs:subClassOf spin:SelectTemplates ;
+      spin:body
+              [ rdf:type sp:Select ;
+                sp:where ([ sp:object
+                                    [ sp:varName "go2"^^xsd:string
+                                    ] ;
+                            sp:predicate spin:_arg1 ;
+                            sp:subject
+                                    [ sp:varName "go1"^^xsd:string
+                                    ]
+                          ])
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The graphic relation to use"^^xsd:string ;
+                spl:optional "false"^^xsd:boolean ;
+                spl:predicate sp:arg1 ;
+                spl:valueType <http://purl.org/viso/graphic/BinaryGraphicO2ORelation>
+              ] .
+
+:ListAllGraphicRelationsOfTypeX
+      rdf:type spin:SelectTemplate ;
+      rdfs:label "List all visual relations x"^^xsd:string ;
+      rdfs:subClassOf spin:SelectTemplates ;
+      spin:body
+              [ rdf:type sp:Select ;
+                sp:where ([ sp:object
+                                    [ sp:varName "go2"^^xsd:string
+                                    ] ;
+                            sp:predicate spin:_arg1 ;
+                            sp:subject
+                                    [ sp:varName "go1"^^xsd:string
+                                    ]
+                          ])
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The graphic relation to use"^^xsd:string ;
+                spl:optional "false"^^xsd:boolean ;
+                spl:predicate sp:arg1 ;
+                spl:valueType <http://purl.org/viso/graphic/GraphicRelation>
+              ] .
+
+:ListBibliographyOverview
+      rdf:type spin:SelectTemplate ;
+      rdfs:label "List bibliography overview"^^xsd:string ;
+      rdfs:subClassOf spin:SelectTemplates ;
+      spin:body
+              [ rdf:type sp:Select ;
+                sp:distinct "true"^^xsd:boolean ;
+                sp:resultVariables (_:b1 _:b2 _:b3) ;
+                sp:where ([ rdf:type sp:TriplePath ;
+                            sp:object <http://purl.org/ontology/bibo/Document> ;
+                            sp:path [ rdf:type sp:SeqPath ;
+                                      sp:path1 rdf:type ;
+                                      sp:path2
+                                              [ rdf:type sp:ModPath ;
+                                                sp:modMax -2 ;
+                                                sp:modMin 0 ;
+                                                sp:subPath rdfs:subClassOf
+                                              ]
+                                    ] ;
+                            sp:subject _:b1
+                          ] [ rdf:type sp:TriplePath ;
+                            sp:object _:b2 ;
+                            sp:path [ rdf:type sp:SeqPath ;
+                                      sp:path1
+                                              [ rdf:type sp:ModPath ;
+                                                sp:modMax -2 ;
+                                                sp:modMin 0 ;
+                                                sp:subPath <http://purl.org/dc/terms/isPartOf>
+                                              ] ;
+                                      sp:path2 <http://purl.org/dc/terms/creator>
+                                    ] ;
+                            sp:subject _:b1
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ rdf:type sp:TriplePath ;
+                                        sp:object _:b3 ;
+                                        sp:path [ rdf:type sp:SeqPath ;
+                                                  sp:path1
+                                                          [ rdf:type sp:ModPath ;
+                                                            sp:modMax -2 ;
+                                                            sp:modMin 0 ;
+                                                            sp:subPath <http://purl.org/dc/terms/isPartOf>
+                                                          ] ;
+                                                  sp:path2 <http://purl.org/dc/terms/date>
+                                                ] ;
+                                        sp:subject _:b1
+                                      ])
+                          ])
+              ] .
+
+:QuotationsWithoutAuthorOrDate
+      rdf:type spin:SelectTemplate ;
+      rdfs:subClassOf :ResourcesWithQuotations ;
+      spin:body
+              [ rdf:type sp:Select ;
+                sp:distinct "true"^^xsd:boolean ;
+                sp:resultVariables (_:b4 _:b5 _:b6) ;
+                sp:where ([ sp:object _:b4 ;
+                            sp:predicate _:b7 ;
+                            sp:subject
+                                    [ sp:varName "subject"^^xsd:string
+                                    ]
+                          ] [ rdf:type sp:TriplePath ;
+                            sp:object <http://purl.org/viso/bibo-extension/considersSource> ;
+                            sp:path [ rdf:type sp:ModPath ;
+                                      sp:modMax -2 ;
+                                      sp:modMin 0 ;
+                                      sp:subPath rdfs:subPropertyOf
+                                    ] ;
+                            sp:subject _:b7
+                          ] [ rdf:type sp:TriplePath ;
+                            sp:object <http://purl.org/ontology/bibo/Document> ;
+                            sp:path [ rdf:type sp:SeqPath ;
+                                      sp:path1 rdf:type ;
+                                      sp:path2
+                                              [ rdf:type sp:ModPath ;
+                                                sp:modMax -2 ;
+                                                sp:modMin 0 ;
+                                                sp:subPath rdfs:subClassOf
+                                              ]
+                                    ] ;
+                            sp:subject _:b4
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ rdf:type sp:TriplePath ;
+                                        sp:object _:b5 ;
+                                        sp:path [ rdf:type sp:SeqPath ;
+                                                  sp:path1
+                                                          [ rdf:type sp:ModPath ;
+                                                            sp:modMax -2 ;
+                                                            sp:modMin 0 ;
+                                                            sp:subPath
+                                                                    [ rdf:type sp:AltPath ;
+                                                                      sp:path1 <http://purl.org/viso/bibo-extension/isDocumentPartOf> ;
+                                                                      sp:path2 <http://purl.org/dc/terms/isPartOf>
+                                                                    ]
+                                                          ] ;
+                                                  sp:path2 <http://purl.org/dc/terms/creator>
+                                                ] ;
+                                        sp:subject _:b4
+                                      ])
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ rdf:type sp:TriplePath ;
+                                        sp:object _:b6 ;
+                                        sp:path [ rdf:type sp:SeqPath ;
+                                                  sp:path1
+                                                          [ rdf:type sp:ModPath ;
+                                                            sp:modMax -2 ;
+                                                            sp:modMin 0 ;
+                                                            sp:subPath
+                                                                    [ rdf:type sp:AltPath ;
+                                                                      sp:path1 <http://purl.org/viso/bibo-extension/isDocumentPartOf> ;
+                                                                      sp:path2 <http://purl.org/dc/terms/isPartOf>
+                                                                    ]
+                                                          ] ;
+                                                  sp:path2 <http://purl.org/dc/terms/date>
+                                                ] ;
+                                        sp:subject _:b4
+                                      ])
+                          ] [ rdf:type sp:Filter ;
+                            sp:expression
+                                    [ rdf:type sp:or ;
+                                      sp:arg1 [ rdf:type sp:not ;
+                                                sp:arg1 [ rdf:type sp:bound ;
+                                                          sp:arg1 _:b5
+                                                        ]
+                                              ] ;
+                                      sp:arg2 [ rdf:type sp:not ;
+                                                sp:arg1 [ rdf:type sp:bound ;
+                                                          sp:arg1 _:b6
+                                                        ]
+                                              ]
+                                    ]
+                          ])
+              ] ;
+      spin:labelTemplate "Used Quotations where no author can be found or no date can be found."^^xsd:string .
+
+:RelationsBasedOnClassRestrictions
+      rdf:type spin:SelectTemplate ;
+      rdfs:label "All relations based on class rectrictions in graphic / data / facts"^^xsd:string ;
+      rdfs:subClassOf spin:SelectTemplates ;
+      spin:body
+              [ rdf:type sp:Select ;
+                sp:from <http://purl.org/viso/graphic/> , <http://purl.org/viso/facts/> , <http://purl.org/viso/data/> ;
+                sp:resultVariables (_:b8 _:b9 _:b10 _:b11 _:b12 _:b13) ;
+                sp:where ([ sp:object _:b14 ;
+                            sp:predicate rdfs:subClassOf ;
+                            sp:subject _:b8
+                          ] [ sp:object _:b9 ;
+                            sp:predicate owl:onProperty ;
+                            sp:subject _:b14
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ sp:object _:b10 ;
+                                        sp:predicate owl:someValuesFrom ;
+                                        sp:subject _:b14
+                                      ])
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ sp:object _:b11 ;
+                                        sp:predicate owl:allValuesFrom ;
+                                        sp:subject _:b14
+                                      ])
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ sp:object _:b12 ;
+                                        sp:predicate owl:hasValue ;
+                                        sp:subject _:b14
+                                      ])
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ sp:object _:b13 ;
+                                        sp:predicate rdf:type ;
+                                        sp:subject _:b14
+                                      ])
+                          ])
+              ] .
+
+:RelevantResourcesSanityReport
+      rdf:type spin:SelectTemplate ;
+      rdfs:label "Resources without quotations"^^xsd:string ;
+      rdfs:subClassOf spin:SelectTemplates ;
+      spin:body
+              [ rdf:type sp:Select ;
+                sp:distinct "true"^^xsd:boolean ;
+                sp:from <http://purl.org/viso/facts/> , <http://purl.org/viso/facts/empiric/> , <http://purl.org/viso/system/> , <http://purl.org/viso/data/> , <http://purl.org/viso/activity/> , <http://purl.org/viso/graphic/> ;
+                sp:resultVariables (_:b15 _:b16 _:b17 _:b18 _:b19) ;
+                sp:where ([ sp:object _:b16 ;
+                            sp:predicate rdf:type ;
+                            sp:subject _:b15
+                          ] [ rdf:type sp:Filter ;
+                            sp:expression
+                                    [ rdf:type sp:and ;
+                                      sp:arg1 [ rdf:type sp:ne ;
+                                                sp:arg1 _:b16 ;
+                                                sp:arg2 owl:Restriction
+                                              ] ;
+                                      sp:arg2 [ rdf:type sp:ne ;
+                                                sp:arg1 _:b16 ;
+                                                sp:arg2 owl:Ontology
+                                              ]
+                                    ]
+                          ] [ rdf:type sp:NamedGraph ;
+                            sp:elements ([ rdf:type sp:TriplePath ;
+                                        sp:object <http://purl.org/viso/bibo-extension/considersSource> ;
+                                        sp:path [ rdf:type sp:ModPath ;
+                                                  sp:modMax -2 ;
+                                                  sp:modMin 0 ;
+                                                  sp:subPath rdfs:subPropertyOf
+                                                ] ;
+                                        sp:subject _:b20
+                                      ]) ;
+                            sp:graphNameNode <http://purl.org/viso/bibo-extension/>
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ rdf:type sp:NamedGraph ;
+                                        sp:elements ([ sp:object
+                                                            [ sp:varName "source"^^xsd:string
+                                                            ] ;
+                                                    sp:predicate _:b20 ;
+                                                    sp:subject _:b15
+                                                  ] [ rdf:type sp:Bind ;
+                                                    sp:expression "true"^^xsd:boolean ;
+                                                    sp:variable _:b19
+                                                  ]) ;
+                                        sp:graphNameNode <http://purl.org/viso/anno/>
+                                      ])
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ sp:object _:b17 ;
+                                        sp:predicate rdfs:comment ;
+                                        sp:subject _:b15
+                                      ])
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ sp:object _:b18 ;
+                                        sp:predicate <http://purl.org/dc/terms/description> ;
+                                        sp:subject _:b15
+                                      ])
+                          ])
+              ] .
+
+:RelevantStatementsInFactsModules
+      rdf:type spin:SelectTemplate ;
+      rdfs:subClassOf spin:SelectTemplates ;
+      spin:body
+              [ rdf:type sp:Select ;
+                sp:orderBy (_:b21) ;
+                sp:where ([ rdf:type sp:Union ;
+                            sp:elements (([ rdf:type sp:NamedGraph ;
+                                          sp:elements ([ sp:object _:b22 ;
+                                                      sp:predicate _:b21 ;
+                                                      sp:subject _:b23
+                                                    ] [ rdf:type sp:NotExists ;
+                                                      sp:elements ([ rdf:type sp:TriplePath ;
+                                                                  sp:object _:b22 ;
+                                                                  sp:path [ rdf:type sp:AltPath ;
+                                                                            sp:path1
+                                                                                    [ rdf:type sp:AltPath ;
+                                                                                      sp:path1
+                                                                                              [ rdf:type sp:AltPath ;
+                                                                                                sp:path1
+                                                                                                        [ rdf:type sp:AltPath ;
+                                                                                                          sp:path1
+                                                                                                                  [ rdf:type sp:AltPath ;
+                                                                                                                    sp:path1
+                                                                                                                            [ rdf:type sp:AltPath ;
+                                                                                                                              sp:path1
+                                                                                                                                      [ rdf:type sp:AltPath ;
+                                                                                                                                        sp:path1
+                                                                                                                                                [ rdf:type sp:AltPath ;
+                                                                                                                                                  sp:path1
+                                                                                                                                                          [ rdf:type sp:AltPath ;
+                                                                                                                                                            sp:path1 rdf:type ;
+                                                                                                                                                            sp:path2 rdf:first
+                                                                                                                                                          ] ;
+                                                                                                                                                  sp:path2 rdf:rest
+                                                                                                                                                ] ;
+                                                                                                                                        sp:path2 owl:allValuesFrom
+                                                                                                                                      ] ;
+                                                                                                                              sp:path2 owl:onProperty
+                                                                                                                            ] ;
+                                                                                                                    sp:path2 rdfs:subClassOf
+                                                                                                                  ] ;
+                                                                                                          sp:path2 rdfs:domain
+                                                                                                        ] ;
+                                                                                                sp:path2 rdfs:range
+                                                                                              ] ;
+                                                                                      sp:path2 rdfs:comment
+                                                                                    ] ;
+                                                                            sp:path2 owl:unionOf
+                                                                          ] ;
+                                                                  sp:subject _:b23
+                                                                ])
+                                                    ]) ;
+                                          sp:graphNameNode <http://purl.org/viso/facts/>
+                                        ]) ([ rdf:type sp:NamedGraph ;
+                                          sp:elements ([ sp:object _:b22 ;
+                                                      sp:predicate _:b21 ;
+                                                      sp:subject _:b23
+                                                    ] [ rdf:type sp:NotExists ;
+                                                      sp:elements ([ rdf:type sp:TriplePath ;
+                                                                  sp:object _:b22 ;
+                                                                  sp:path [ rdf:type sp:AltPath ;
+                                                                            sp:path1
+                                                                                    [ rdf:type sp:AltPath ;
+                                                                                      sp:path1
+                                                                                              [ rdf:type sp:AltPath ;
+                                                                                                sp:path1
+                                                                                                        [ rdf:type sp:AltPath ;
+                                                                                                          sp:path1
+                                                                                                                  [ rdf:type sp:AltPath ;
+                                                                                                                    sp:path1
+                                                                                                                            [ rdf:type sp:AltPath ;
+                                                                                                                              sp:path1
+                                                                                                                                      [ rdf:type sp:AltPath ;
+                                                                                                                                        sp:path1
+                                                                                                                                                [ rdf:type sp:AltPath ;
+                                                                                                                                                  sp:path1
+                                                                                                                                                          [ rdf:type sp:AltPath ;
+                                                                                                                                                            sp:path1 rdf:type ;
+                                                                                                                                                            sp:path2 rdf:first
+                                                                                                                                                          ] ;
+                                                                                                                                                  sp:path2 rdf:rest
+                                                                                                                                                ] ;
+                                                                                                                                        sp:path2 owl:allValuesFrom
+                                                                                                                                      ] ;
+                                                                                                                              sp:path2 owl:onProperty
+                                                                                                                            ] ;
+                                                                                                                    sp:path2 rdfs:subClassOf
+                                                                                                                  ] ;
+                                                                                                          sp:path2 rdfs:domain
+                                                                                                        ] ;
+                                                                                                sp:path2 rdfs:range
+                                                                                              ] ;
+                                                                                      sp:path2 rdfs:comment
+                                                                                    ] ;
+                                                                            sp:path2 owl:unionOf
+                                                                          ] ;
+                                                                  sp:subject _:b23
+                                                                ])
+                                                    ]) ;
+                                          sp:graphNameNode <http://purl.org/viso/facts/empiric/>
+                                        ]))
+                          ])
+              ] ;
+      spin:labelTemplate "Relevant statements in VISO facts (and empiric facts)"^^xsd:string .
+
+:ResourcesThatAreStable
+      rdf:type spin:SelectTemplate ;
+      rdfs:label "Resources that are stable"^^xsd:string ;
+      rdfs:subClassOf spin:SelectTemplates ;
+      spin:body
+              [ rdf:type sp:Select ;
+                sp:where ([ sp:object "stable" ;
+                            sp:predicate <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> ;
+                            sp:subject
+                                    [ sp:varName "subject"^^xsd:string
+                                    ]
+                          ])
+              ] ;
+      spin:labelTemplate "Show all resources that are stable."^^xsd:string .
+
+:ResourcesWithQuotations
+      rdf:type spin:SelectTemplate ;
+      rdfs:subClassOf spin:SelectTemplates ;
+      spin:body
+              [ rdf:type sp:Select ;
+                sp:distinct "true"^^xsd:boolean ;
+                sp:resultVariables (_:b24 _:b25 _:b26 _:b27 _:b28 _:b29 _:b30) ;
+                sp:where ([ sp:object _:b31 ;
+                            sp:predicate _:b25 ;
+                            sp:subject _:b24
+                          ] [ rdf:type sp:TriplePath ;
+                            sp:object <http://purl.org/viso/bibo-extension/considersSource> ;
+                            sp:path [ rdf:type sp:ModPath ;
+                                      sp:modMax -2 ;
+                                      sp:modMin 0 ;
+                                      sp:subPath rdfs:subPropertyOf
+                                    ] ;
+                            sp:subject _:b25
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ sp:object _:b26 ;
+                                        sp:predicate <http://purl.org/viso/bibo-extension/documentContent> ;
+                                        sp:subject _:b31
+                                      ])
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ sp:object _:b30 ;
+                                        sp:predicate <http://purl.org/ontology/bibo/pages> ;
+                                        sp:subject _:b31
+                                      ])
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ sp:object _:b30 ;
+                                        sp:predicate <http://purl.org/ontology/bibo/section> ;
+                                        sp:subject _:b31
+                                      ])
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ sp:object _:b32 ;
+                                        sp:predicate _:b33 ;
+                                        sp:subject _:b31
+                                      ] [ rdf:type sp:TriplePath ;
+                                        sp:object <http://purl.org/dc/terms/isPartOf> ;
+                                        sp:path [ rdf:type sp:ModPath ;
+                                                  sp:modMax -2 ;
+                                                  sp:modMin 0 ;
+                                                  sp:subPath rdfs:subPropertyOf
+                                                ] ;
+                                        sp:subject _:b33
+                                      ] [ rdf:type sp:Optional ;
+                                        sp:elements ([ sp:object _:b34 ;
+                                                    sp:predicate <http://purl.org/dc/terms/creator> ;
+                                                    sp:subject _:b32
+                                                  ] [ sp:object _:b27 ;
+                                                    sp:predicate <http://xmlns.com/foaf/0.1/family_name> ;
+                                                    sp:subject _:b34
+                                                  ])
+                                      ] [ rdf:type sp:Optional ;
+                                        sp:elements ([ sp:object _:b29 ;
+                                                    sp:predicate <http://purl.org/dc/terms/title> ;
+                                                    sp:subject _:b32
+                                                  ])
+                                      ] [ rdf:type sp:Union ;
+                                        sp:elements (([ sp:object _:b35 ;
+                                                      sp:predicate _:b36 ;
+                                                      sp:subject _:b32
+                                                    ] [ rdf:type sp:TriplePath ;
+                                                      sp:object <http://purl.org/dc/terms/isPartOf> ;
+                                                      sp:path [ rdf:type sp:ModPath ;
+                                                                sp:modMax -2 ;
+                                                                sp:modMin 0 ;
+                                                                sp:subPath rdfs:subPropertyOf
+                                                              ] ;
+                                                      sp:subject _:b36
+                                                    ] [ sp:object _:b28 ;
+                                                      sp:predicate <http://purl.org/dc/terms/date> ;
+                                                      sp:subject _:b35
+                                                    ]) ([ sp:object _:b28 ;
+                                                      sp:predicate <http://purl.org/dc/terms/date> ;
+                                                      sp:subject _:b32
+                                                    ]))
+                                      ])
+                          ])
+              ] ;
+      spin:labelTemplate "Terms with quotations - FLAT (only as details)"^^xsd:string .
+
+:ResourcesWithQuotationsOfWrongType
+      rdf:type spin:SelectTemplate ;
+      rdfs:subClassOf :ResourcesWithQuotations ;
+      spin:body
+              [ rdf:type sp:Select ;
+                sp:resultVariables (_:b37 _:b38 _:b39) ;
+                sp:where ([ sp:object _:b39 ;
+                            sp:predicate _:b38 ;
+                            sp:subject _:b37
+                          ] [ rdf:type sp:TriplePath ;
+                            sp:object <http://purl.org/viso/bibo-extension/considersSource> ;
+                            sp:path [ rdf:type sp:ModPath ;
+                                      sp:modMax -2 ;
+                                      sp:modMin 0 ;
+                                      sp:subPath rdfs:subPropertyOf
+                                    ] ;
+                            sp:subject _:b38
+                          ] [ rdf:type sp:Optional ;
+                            sp:elements ([ rdf:type sp:TriplePath ;
+                                        sp:object <http://purl.org/ontology/bibo/Document> ;
+                                        sp:path [ rdf:type sp:SeqPath ;
+                                                  sp:path1 rdf:type ;
+                                                  sp:path2
+                                                          [ rdf:type sp:ModPath ;
+                                                            sp:modMax -2 ;
+                                                            sp:modMin 0 ;
+                                                            sp:subPath rdfs:subClassOf
+                                                          ]
+                                                ] ;
+                                        sp:subject _:b39
+                                      ] [ rdf:type sp:Bind ;
+                                        sp:expression "true"^^xsd:boolean ;
+                                        sp:variable _:b40
+                                      ])
+                          ] [ rdf:type sp:Filter ;
+                            sp:expression
+                                    [ rdf:type sp:not ;
+                                      sp:arg1 [ rdf:type sp:bound ;
+                                                sp:arg1 _:b40
+                                              ]
+                                    ]
+                          ])
+              ] ;
+      spin:labelTemplate "Resources which are annotated with a source, but not by means of a bibo:Quote or bibo:Document."^^xsd:string .
+
+_:b3  sp:varName "date"^^xsd:string .
+
+_:b2  sp:varName "creator"^^xsd:string .
+
+_:b1  sp:varName "document"^^xsd:string .
+
+[]    sp:object
+              [ sp:varName "object"^^xsd:string
+              ] ;
+      sp:predicate
+              [ sp:varName "p"^^xsd:string
+              ] ;
+      sp:subject
+              [ sp:varName "subject"^^xsd:string
+              ] .
+
+[]    sp:object
+              [ sp:varName "object"^^xsd:string
+              ] ;
+      sp:predicate
+              [ sp:varName "p"^^xsd:string
+              ] ;
+      sp:subject
+              [ sp:varName "subject"^^xsd:string
+              ] .
+
+[]    sp:object
+              [ sp:varName "object"^^xsd:string
+              ] ;
+      sp:predicate
+              [ sp:varName "p"^^xsd:string
+              ] ;
+      sp:subject
+              [ sp:varName "subject"^^xsd:string
+              ] .
+
+[]    sp:object
+              [ sp:varName "object"^^xsd:string
+              ] ;
+      sp:predicate
+              [ sp:varName "p"^^xsd:string
+              ] ;
+      sp:subject
+              [ sp:varName "subject"^^xsd:string
+              ] .
+
+[]    sp:object
+              [ sp:varName "object"^^xsd:string
+              ] ;
+      sp:predicate
+              [ sp:varName "p"^^xsd:string
+              ] ;
+      sp:subject
+              [ sp:varName "subject"^^xsd:string
+              ] .
+
+[]    sp:object
+              [ sp:varName "object"^^xsd:string
+              ] ;
+      sp:predicate
+              [ sp:varName "p"^^xsd:string
+              ] ;
+      sp:subject
+              [ sp:varName "subject"^^xsd:string
+              ] .
+
+[]    sp:object
+              [ sp:varName "object"^^xsd:string
+              ] ;
+      sp:predicate
+              [ sp:varName "p"^^xsd:string
+              ] ;
+      sp:subject
+              [ sp:varName "subject"^^xsd:string
+              ] .
+
+[]    sp:object
+              [ sp:varName "object"^^xsd:string
+              ] ;
+      sp:predicate
+              [ sp:varName "p"^^xsd:string
+              ] ;
+      sp:subject
+              [ sp:varName "subject"^^xsd:string
+              ] .
+
+_:b40
+      sp:varName "properSourceType"^^xsd:string .
+
+_:b39
+      sp:varName "source"^^xsd:string .
+
+_:b38
+      sp:varName "p"^^xsd:string .
+
+_:b37
+      sp:varName "subject"^^xsd:string .
+
+_:b36
+      sp:varName "pp"^^xsd:string .
+
+_:b35
+      sp:varName "x"^^xsd:string .
+
+_:b34
+      sp:varName "oneOfTheAuthors"^^xsd:string .
+
+_:b33
+      sp:varName "partProperty1"^^xsd:string .
+
+_:b32
+      sp:varName "document"^^xsd:string .
+
+_:b31
+      sp:varName "source"^^xsd:string .
+
+_:b30
+      sp:varName "location"^^xsd:string .
+
+_:b29
+      sp:varName "documentTitle"^^xsd:string .
+
+_:b28
+      sp:varName "pubDate"^^xsd:string .
+
+_:b27
+      sp:varName "authorFamilyName"^^xsd:string .
+
+_:b26
+      sp:varName "sourceContent"^^xsd:string .
+
+_:b25
+      sp:varName "p"^^xsd:string .
+
+_:b24
+      sp:varName "subject"^^xsd:string .
+
+_:b23
+      sp:varName "subject"^^xsd:string .
+
+_:b22
+      sp:varName "object"^^xsd:string .
+
+_:b21
+      sp:varName "p"^^xsd:string .
+
+_:b20
+      sp:varName "p"^^xsd:string .
+
+_:b19
+      sp:varName "citation"^^xsd:string .
+
+_:b18
+      sp:varName "description"^^xsd:string .
+
+_:b17
+      sp:varName "comment"^^xsd:string .
+
+_:b16
+      sp:varName "type"^^xsd:string .
+
+_:b15
+      sp:varName "subject"^^xsd:string .
+
+_:b14
+      sp:varName "restriction"^^xsd:string .
+
+_:b13
+      sp:varName "restrictionType"^^xsd:string .
+
+_:b12
+      sp:varName "value"^^xsd:string .
+
+_:b11
+      sp:varName "only"^^xsd:string .
+
+_:b10
+      sp:varName "some"^^xsd:string .
+
+_:b9  sp:varName "property"^^xsd:string .
+
+_:b8  sp:varName "subject"^^xsd:string .
+
+_:b7  sp:varName "p"^^xsd:string .
+
+_:b6  sp:varName "date"^^xsd:string .
+
+_:b5  sp:varName "creator"^^xsd:string .
+
+_:b4  sp:varName "quote"^^xsd:string .

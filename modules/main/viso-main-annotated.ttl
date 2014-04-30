@@ -1,0 +1,15 @@
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix viso-anno:  <http://purl.org/viso/anno/> .
+@prefix viso-annotated:  <http://purl.org/viso/annotated/> .
+@prefix viso-data:  <http://purl.org/viso/data/> .
+@prefix viso-facts:  <http://purl.org/viso/facts/> .
+@prefix viso-graphic:  <http://purl.org/viso/graphic/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+viso-annotated:
+      rdf:type owl:Ontology ;
+      rdfs:comment "This serves only as a container to import the annotations and the main viso ontology. Instead also viso-anno may be used."^^xsd:string ;
+      owl:imports <http://purl.org/viso/> , viso-anno: , <http://purl.org/viso/bibliography/> ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .

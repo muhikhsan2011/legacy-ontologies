@@ -1,0 +1,33 @@
+@prefix :        <http://purl.org/viso/example/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix viso:    <http://purl.org/viso/> .
+@prefix viso-data:  <http://purl.org/viso/data/> .
+@prefix viso-example:  <http://purl.org/viso/example/> .
+@prefix viso-graphic:  <http://purl.org/viso/graphic/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+viso-example:
+      rdf:type owl:Ontology ;
+      owl:imports viso: ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+viso-example:Big
+      rdf:type viso-data:Data_Value ;
+      rdfs:label "Big"^^xsd:string .
+
+viso-example:Geography
+      rdf:type viso-data:Domain , owl:NamedIndividual , owl:Thing .
+
+viso-example:Physics
+      rdf:type viso-data:Domain , owl:NamedIndividual , owl:Thing .
+
+viso-example:Water_Depth
+      rdf:type viso-data:Data_Variable ;
+      viso-data:has_ordinal_value
+              "3"^^xsd:float ;
+      viso-data:has_scale_of_measurement
+              viso-data:Quantitative_Scale_of_Measurement ;
+      viso-graphic:plays_role
+              viso-data:Continuous_Variable , viso-data:Dependent_Variable .

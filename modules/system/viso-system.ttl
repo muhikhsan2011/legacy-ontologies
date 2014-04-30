@@ -1,0 +1,338 @@
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix swstatus:  <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix viso-system:  <http://purl.org/viso/system/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://purl.org/viso/graphic/Range_Slider>
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:User_Interface_Software_Component ;
+      dct:description "Allows sliding a whole range and also setting the width of this range"^^xsd:string .
+
+viso-system:
+      rdf:type owl:Ontology ;
+      rdfs:label "System context module of the Visualisation Ontology (VISO)"@en , "System-Kontext-Modul der Visualsierungsontologie (VISO)"@de ;
+      dct:creator <http://purl.org/viso/JanPolowinski> , <http://purl.org/viso/MartinVoigt> ;
+      dct:description "The system context module of VISO offers vocabulary for defining the hardware and software context of a visualisation."@en ;
+      owl:imports dct: ;
+      owl:versionInfo "0.5"^^xsd:string .
+
+viso-system:Application
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Software ;
+      dct:description "An application is a computer program designed to help people perform an activity"^^xsd:string .
+
+viso-system:Application_Framework
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Software ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/is_used_by> ;
+                owl:someValuesFrom viso-system:Application
+              ] ;
+      dct:description "An application framework is used by software developers to implement the standard structure of an application for a specific development environment."^^xsd:string .
+
+viso-system:Application_Programming_Interface
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Software ;
+      owl:equivalentClass viso-system:Interface ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-system:CaveScenarioAtTUDresden
+      rdf:type viso-system:Cave_Scenario , owl:NamedIndividual , owl:Thing .
+
+viso-system:Cave_Scenario
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Visualisation_Scenario ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-system:Circular_Dimension
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Spatial_Dimension ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/describeable_by> ;
+                owl:someValuesFrom <http://purl.org/viso/graphic/Polar_Coordinate>
+              ] .
+
+viso-system:Composite_Application
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Application ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/has> ;
+                owl:someValuesFrom viso-system:Software_Component
+              ] ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:minQualifiedCardinality
+                        "2"^^xsd:nonNegativeInteger ;
+                owl:onClass viso-system:Software_Component ;
+                owl:onProperty <http://purl.org/viso/graphic/has>
+              ] ;
+      dct:description "An application using the component paradigm."^^xsd:string .
+
+viso-system:Computational_Thing
+      rdf:type owl:Class ;
+      rdfs:comment "Specifying the domain of complete computaional systems is out of scope here. Only need concepts would be developed or were referred. The Common Information Model (CIM) suggested by DTFM as UML model (http://dmtf.org/standards/cim) show the broadness of this domain."^^xsd:string ;
+      rdfs:subClassOf viso-system:System_Thing .
+
+viso-system:Depth_Dimension
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Rectilinear_Dimension ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/describeable_by> ;
+                owl:someValuesFrom <http://purl.org/viso/graphic/Distal_Coordinate>
+              ] .
+
+viso-system:Desktop_Scenario
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Visualisation_Scenario ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-system:Display_Device
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Hardware , viso-system:Medium_of_Display ;
+      dct:description "Presenting the visual output of computational system. e.g. a common monitor, projector, ..."^^xsd:string ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-system:Hardware
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Computational_Thing ;
+      dct:description "Model of the hardware, stating how much cpu power, RAM, available interaction devices etc."^^xsd:string .
+
+viso-system:Horizontal_Dimension
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Rectilinear_Dimension ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/describeable_by> ;
+                owl:someValuesFrom <http://purl.org/viso/graphic/Horizontal_Coordinate>
+              ] .
+
+viso-system:Interaction_Device
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Hardware ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-system:Interactive_System
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Hardware ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/has> ;
+                owl:someValuesFrom viso-system:Interaction_Device
+              ] ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/has> ;
+                owl:someValuesFrom viso-system:Display_Device
+              ] ;
+      dct:description "A computational system which enables the user to interact with using interaction and display devices, e.g. PC, smartphone, surface,..."^^xsd:string .
+
+viso-system:Interface
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Software ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/belongs_to> ;
+                owl:someValuesFrom viso-system:Application_Framework
+              ] .
+
+viso-system:Medium_of_Display
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Physical_Thing ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/has> ;
+                owl:someValuesFrom viso-system:Physical_Space
+              ] .
+
+viso-system:Multiple_Views_System
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Application ;
+      owl:disjointWith viso-system:Single_View_System ;
+      owl:equivalentClass
+              [ rdf:type owl:Class ;
+                owl:intersectionOf (viso-system:Software [ rdf:type owl:Restriction ;
+                            owl:minQualifiedCardinality
+                                    "2"^^xsd:nonNegativeInteger ;
+                            owl:onClass <http://purl.org/viso/graphic/View> ;
+                            owl:onProperty <http://purl.org/viso/graphic/has>
+                          ])
+              ] ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-system:Physical_Space
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Physical_Thing ;
+      dct:description "The space that the Medium of Display offers. In contrast to the Graphic Space it is not a mental construct and often two-dimensional."^^xsd:string ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-system:Physical_Thing
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:System_Thing .
+
+viso-system:Programming_Language
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Computational_Thing .
+
+viso-system:Rectilinear_Dimension
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Spatial_Dimension ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/describeable_by> ;
+                owl:someValuesFrom <http://purl.org/viso/graphic/Rectilinear_Coordinate>
+              ] .
+
+viso-system:SVG
+      rdf:type viso-system:Programming_Language , owl:NamedIndividual , owl:Thing ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-system:Single_View_System
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Application ;
+      owl:equivalentClass
+              [ rdf:type owl:Class ;
+                owl:intersectionOf (viso-system:Software [ rdf:type owl:Restriction ;
+                            owl:onClass <http://purl.org/viso/graphic/View> ;
+                            owl:onProperty <http://purl.org/viso/graphic/has> ;
+                            owl:qualifiedCardinality
+                                    "1"^^xsd:nonNegativeInteger
+                          ])
+              ] ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-system:Software
+      rdf:type owl:Class ;
+      rdfs:comment """Existing ontologies (or at least taxonomies) should be used to specify this domain. Possible ressource are:
+
+@ARTICLE{Wang2009,
+  author = {Wang, Hai h. and Sun, Jing},
+  title = {A semantic web environment for components},
+  journal = {Knowl. Eng. Rev.},
+  year = {2009},
+  volume = {24},
+  pages = {59--75},
+  month = {December},
+  acmid = {1520273},
+  address = {New York, NY, USA},
+  doi = {10.1017/S0269888909000137},
+  issn = {0269-8889},
+  issue = {1},
+  numpages = {17},
+  owner = {m.voigt},
+  publisher = {Cambridge University Press},
+  timestamp = {2010.11.25},
+  url = {http://my.confolio.org/portfolio/files/goranhedstrom/Tankesmedjan/A%20semantic%20web%20environment%20for%20components.pdf}
+}
+
+@ARTICLE{Oberle2006,
+  author = {Oberle, Daniel and Lamparter, Steffen and Grimm, S. and Vrande\\v{c}i\\'{c},
+	D. and Staab, S. and Gangemi, A.},
+  title = {Towards ontologies for formalizing modularization and communication
+	in large software systems},
+  journal = {Appl. Ontol.},
+  year = {2006},
+  volume = {1},
+  pages = {163--202},
+  month = {April},
+  acmid = {1412366},
+  address = {Amsterdam, The Netherlands, The Netherlands},
+  issn = {1570-5838},
+  issue = {2},
+  keywords = {ontologies, software, component, definition},
+  numpages = {40},
+  publisher = {IOS Press},
+  url = {http://portal.acm.org/citation.cfm?id=1412362.1412366}
+}"""^^xsd:string ;
+      rdfs:subClassOf viso-system:Computational_Thing .
+
+viso-system:Software_Component
+      rdf:type owl:Class ;
+      rdfs:comment """\"A software component is a unit of composition with contractually specified interfaces and explicit context dependencies only. A software component can be deployed independently and is subject to third-party composition.\"
+
+Szyperski, Clemens: Component Software: Beyond Object-Oriented
+Programming. Addison-Wesley Professional, 2 Auflage, 2002. ISBN
+0-201-74572-0.""" ;
+      rdfs:subClassOf viso-system:Software ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/has> ;
+                owl:someValuesFrom viso-system:Interface
+              ] ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/belongs_to> ;
+                owl:someValuesFrom viso-system:Application_Framework
+              ] .
+
+viso-system:Spatial_Dimension
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Physical_Thing ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/describeable_by> ;
+                owl:someValuesFrom <http://purl.org/viso/graphic/Coordinate>
+              ] .
+
+viso-system:System_Thing
+      rdf:type owl:Class ;
+      rdfs:label "System Thing"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+viso-system:Unstructured_Dimension
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Spatial_Dimension .
+
+viso-system:User_Interface_Software_Component
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Software_Component ;
+      dct:description "Its a component having a graphical representation."^^xsd:string ;
+      skos:editorialNote "TODO: needs maybe a further distinction in future"^^xsd:string .
+
+viso-system:Vertical_Dimension
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Rectilinear_Dimension ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty <http://purl.org/viso/graphic/describeable_by> ;
+                owl:someValuesFrom <http://purl.org/viso/graphic/Vertical_Coordinate>
+              ] .
+
+viso-system:Visualisation_Platform
+      rdf:type owl:Class ;
+      rdfs:comment "TODO: kann gelöscht werden oder muss einen anderen Sinn bekommen" , """The final presentation language for which SemVis outputs the platform specific code [9, DA Polowinski, Glossary]
+*Examples: X3D, SVG, HTML"""^^xsd:string ;
+      rdfs:subClassOf viso-system:Programming_Language .
+
+viso-system:Visualisation_Scenario
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-system:Physical_Thing ;
+      dct:description "A Visualisation Scenario describes a usage scenario, i.e. the environment of a visualization including the available hardware, characteristics of the construction and the probable audience."^^xsd:string ;
+      swstatus:term_status
+              "stable"^^xsd:string ;
+      skos:editorialNote "Check: Three of the properties are also used to describe the VisualizationPlatform: offersSpatialDimensions, offersAnimation and offersInteraction have both classes as their domain in DA Polowinski, p. 43."^^xsd:string ;
+      skos:example "Examples for scenarios are Desktop, Cave or Powerwall (cf. subclasses). For each of these scenarios, it could be stated whether stereo display is supported (offersSpatialDimension), how many colors the systems graphic devices can display the maximum resolution of the target system is, if videos can be played (offersAnimation) and if interaction is possible at all (offersInteraction). The position of the user, i.e. if the situation is immersive or not, could be stated by the property isImmersive. (Not all implemented.)"^^xsd:string .
+
+viso-system:X3D
+      rdf:type viso-system:Programming_Language , owl:NamedIndividual , owl:Thing ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-system:XHTML
+      rdf:type viso-system:Programming_Language , owl:NamedIndividual , owl:Thing .

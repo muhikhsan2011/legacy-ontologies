@@ -1,0 +1,68 @@
+@prefix :        <http://purl.org/viso/shape/commons/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix terms:   <http://purl.org/dc/terms/> .
+@prefix viso-graphic:  <http://purl.org/viso/graphic/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+:     rdf:type owl:Ontology ;
+      terms:creator <http://purl.org/viso/JanPolowinski> ;
+      owl:imports terms: , viso-graphic: ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+:Arrow
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Arrow"^^xsd:string .
+
+:Checked
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Checked"^^xsd:string .
+
+:Circle
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Circle"^^xsd:string .
+
+:Clock
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Clock"^^xsd:string .
+
+:Exklamation_Mark
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Exklamation Mark"^^xsd:string .
+
+:Flag_English
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Flag English"^^xsd:string .
+
+:Flag_German
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Flag German"^^xsd:string .
+
+:Lightning
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Lightning"^^xsd:string .
+
+:Pyramid
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Pyramid"^^xsd:string .
+
+:Rectangle
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Rectangle"^^xsd:string .
+
+:Rhomb
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Rhomb"^^xsd:string .
+
+:RoundedRectangle
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Rounded rectangle"^^xsd:string .
+
+:Square
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Square"^^xsd:string .
+
+:Star
+      rdf:type viso-graphic:Shape ;
+      rdfs:label "Star"^^xsd:string .

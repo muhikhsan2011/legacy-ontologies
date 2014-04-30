@@ -1,0 +1,46 @@
+CONSTRUCT {
+	?resource rdfs:label ?newLabel
+}
+FROM viso-graphic:
+WHERE {
+    {
+	{?resource a rdfs:Class}
+	UNION 
+	{?resource a owl:Class}
+	} 
+	NOT EXISTS {?resource owl:intersectionOf ?something }
+	NOT EXISTS {?resource owl:unionOf ?something }
+	NOT EXISTS {?resource rdfs:label ?existingLabel}
+	BIND ( smf:name(afn:localname(?resource)) as ?text)
+	FILTER(REGEX(?text, '_'))
+	BIND (smf:regex(?text, '_', ' ', 'i') AS ?newLabel)
+}
+
+
+
+
+	# SPARQL 1.1 standard funktioniert anscheinend nicht in topbraid. stattdessen wie oben mit REGEX[4]
+	#BIND ( fn:replace ( ?label, '_', ' ', 'i') AS ?newLabel)
+
+
+
+# notlösung: alle ohne "_" anschließend noch belabeln:
+
+CONSTRUCT {
+	?resource rdfs:label ?newLabel
+}
+FROM viso-graphic:
+WHERE {
+    {
+	{?resource a rdfs:Class}
+	UNION 
+	{?resource a owl:Class}
+	} 
+	NOT EXISTS {?resource owl:intersectionOf ?something }
+	NOT EXISTS {?resource owl:unionOf ?something }
+	NOT EXISTS {?resource rdfs:label ?existingLabel}
+	BIND ( smf:name(afn:localname(?resource)) as ?text)
+	BIND (?text AS ?newLabel)
+}
+
+

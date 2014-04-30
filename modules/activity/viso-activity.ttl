@@ -1,0 +1,339 @@
+@prefix bibo:    <http://purl.org/ontology/bibo/> .
+@prefix bixt:    <http://purl.org/viso/bibo-extension/> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix empiric:  <http://purl.org/viso/facts/empiric/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix swstatus:  <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix viso-activity:  <http://purl.org/viso/activity/> .
+@prefix viso-data:  <http://purl.org/viso/data/> .
+@prefix viso-facts:  <http://purl.org/viso/facts/> .
+@prefix viso-graphic:  <http://purl.org/viso/graphic/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+viso-activity:
+      rdf:type owl:Ontology ;
+      rdfs:label "Activity module of the Visualisation Ontology (VISO)"@en , "Aktivitäts-Modul der Visualisierungsontologie (VISO)"@de ;
+      dct:creator <http://purl.org/viso/JanPolowinski> , <http://purl.org/viso/MartinVoigt> ;
+      dct:description "The activity module of VISO decribes tasks, actions an methods related to the visualisation process."@en ;
+      owl:imports <http://purl.org/viso/anno/> , viso-graphic: ;
+      owl:versionInfo "0.5"^^xsd:string .
+
+viso-activity:Action
+      rdf:type owl:Class ;
+      rdfs:label "Low-Level Task /Action"^^xsd:string ;
+      rdfs:subClassOf viso-activity:Human_Activity ;
+      dct:description "An action defines WHAT a user does. He can manipulate the data or the graphic representation."^^xsd:string ;
+      owl:disjointWith viso-activity:Composite_Task , viso-activity:Operation , viso-activity:Task ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Activity_Thing
+      rdf:type owl:Class ;
+      rdfs:label "Activity Thing"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+viso-activity:Algorithm
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Activity_Thing .
+
+viso-activity:Analytical_Abstraction
+      rdf:type viso-activity:Process_State , owl:NamedIndividual , owl:Thing .
+
+viso-activity:Brush
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:View_Action .
+
+viso-activity:Change_Metaphor
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:View_Action .
+
+viso-activity:Change_Range
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:View_Action .
+
+viso-activity:Click
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Operation ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Composite_Task
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Task ;
+      owl:equivalentClass
+              [ rdf:type owl:Class ;
+                owl:intersectionOf ([ rdf:type owl:Restriction ;
+                            owl:allValuesFrom viso-activity:Task ;
+                            owl:onProperty viso-graphic:consists_of
+                          ] [ rdf:type owl:Restriction ;
+                            owl:minQualifiedCardinality
+                                    "2"^^xsd:nonNegativeInteger ;
+                            owl:onClass viso-activity:Task ;
+                            owl:onProperty viso-graphic:consists_of
+                          ])
+              ] ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Continuous
+      rdf:type viso-activity:Update_Characteristic , owl:NamedIndividual , owl:Thing .
+
+viso-activity:Create
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Data_Action .
+
+viso-activity:Data_Action
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Action ;
+      dct:description "action to work on data"^^xsd:string .
+
+viso-activity:Data_Filtering
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Machine_Process_Step , viso-activity:Visualisation_Pipeline_Part ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Data_State
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Process_State .
+
+viso-activity:Data_Transformation
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Machine_Process_Step , viso-activity:Visualisation_Pipeline_Part .
+
+viso-activity:Delete
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Data_Action .
+
+viso-activity:Drag
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Operation .
+
+viso-activity:Editing
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Machine_Process_Step , viso-activity:Visualisation_Pipeline_Part .
+
+viso-activity:Elementary_Task
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Task ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty viso-graphic:has ;
+                owl:someValuesFrom viso-activity:Action
+              ] ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Filter
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Data_Action .
+
+viso-activity:Generation
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Machine_Process_Step , viso-activity:Visualisation_Pipeline_Part .
+
+viso-activity:Gesture
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Operation ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Human_Activity
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Activity_Thing ;
+      dct:description "Human Activity is the 'umbrella term' holding everything about to structure human doing"^^xsd:string ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Interaction
+      rdf:type owl:Class ;
+      rdfs:comment "Also machine-machine interaction possible." ;
+      rdfs:subClassOf viso-activity:Process .
+
+viso-activity:Machine_Process_Step
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Process_Step ;
+      dct:description "process steps done by machines, e.g. computers"^^xsd:string .
+
+viso-activity:Merge
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:View_Action .
+
+viso-activity:Method
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Activity_Thing ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty viso-graphic:has ;
+                owl:someValuesFrom viso-data:Data
+              ] .
+
+viso-activity:Multitouch
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Operation ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Never
+      rdf:type viso-activity:Update_Characteristic , owl:NamedIndividual , owl:Thing .
+
+viso-activity:Operation
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Human_Activity ;
+      dct:description "An operation (also interaction) defines HOW a user does something. This doing is unconscious."^^xsd:string ;
+      owl:disjointWith viso-activity:Task ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Pan
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Change_Range ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Periodically
+      rdf:type viso-activity:Update_Characteristic , owl:NamedIndividual , owl:Thing .
+
+viso-activity:Process
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Activity_Thing ;
+      rdfs:subClassOf
+              [ owl:onProperty viso-graphic:has ;
+                owl:someValuesFrom viso-activity:Process_Step
+              ] ;
+      dct:description """a particular course of action intended to achieve a result
+
+Process steps could be done by machines as well as humans"""^^xsd:string .
+
+viso-activity:Process_State
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Visualisation_Pipeline_Part .
+
+viso-activity:Process_Step
+      rdf:type owl:Class ;
+      rdfs:comment """===Stage (Mapping Stage)===
+*Resources: [38,39,40]
+*Context: mapping allows parameterization at different stages"""^^xsd:string ;
+      rdfs:subClassOf viso-activity:Activity_Thing ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Projection
+      rdf:type viso-activity:Process_Step , owl:NamedIndividual , owl:Thing .
+
+viso-activity:Sort
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:View_Action ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Split
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:View_Action .
+
+viso-activity:Task
+      rdf:type owl:Class ;
+      rdfs:label "High Level Task"^^xsd:string , "Human Process Step"^^xsd:string ;
+      rdfs:subClassOf viso-activity:Human_Activity , viso-activity:Process_Step ;
+      dct:description "A task defines WHY a user does something."^^xsd:string ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Update
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Data_Action .
+
+viso-activity:Update_Characteristic
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Activity_Thing .
+
+viso-activity:View_Action
+      rdf:type owl:Class ;
+      rdfs:comment "Interface between high level presentation intends and low-level techniques"^^xsd:string ;
+      rdfs:subClassOf viso-activity:Action ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty viso-graphic:refers_to ;
+                owl:someValuesFrom viso-graphic:View
+              ] ;
+      dct:description "Action are done to manipulate the visual representation, to work with/on the views"^^xsd:string ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:View_State
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Process_State .
+
+viso-activity:View_Transformation
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Machine_Process_Step , viso-activity:Visualisation_Pipeline_Part .
+
+viso-activity:Virtual_Image
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Activity_Thing ;
+      dct:description "The image in the mind of the user."^^xsd:string .
+
+viso-activity:Visual_Mapping
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Machine_Process_Step , viso-activity:Visualisation_Pipeline_Part ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Visualisation
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Process ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:Visualisation_Intent
+      rdf:type owl:Class ;
+      rdfs:comment """===Reason===
+*Context: Working with vis. has some reason"""^^xsd:string ;
+      rdfs:subClassOf viso-activity:Activity_Thing .
+
+viso-activity:Visualisation_Model
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Activity_Thing .
+
+viso-activity:Visualisation_Pipeline
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Visualisation_Model .
+
+viso-activity:Visualisation_Pipeline_Part
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Activity_Thing .
+
+viso-activity:Visualization_Abstraction
+      rdf:type viso-activity:Process_State , owl:NamedIndividual , owl:Thing .
+
+viso-activity:Within_Stage_Operator
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Visualisation_Pipeline_Part .
+
+viso-activity:Zoom
+      rdf:type owl:Class ;
+      rdfs:subClassOf viso-activity:Change_Range ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+viso-activity:belongs_to_step
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "States to which step in a visualization pipeline the Interaction Technique belongs to."^^xsd:string ;
+      rdfs:domain viso-graphic:Interactive_Technique ;
+      rdfs:range viso-activity:Process_Step .
+
+viso-activity:has_goal
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain viso-activity:Task ;
+      swstatus:term_status
+              "stable"^^xsd:string .
+
+<http://purl.org/viso/system/Interface>
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty viso-graphic:has ;
+                owl:someValuesFrom viso-activity:Method
+              ] .

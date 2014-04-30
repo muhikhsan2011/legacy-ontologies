@@ -1,0 +1,15 @@
+SELECT *
+WHERE {
+    ?subject swstatus:term_status "stable" .
+}
+
+
+
+#### ONTOLOGY STATUS #####
+SELECT *
+WHERE {
+    ?ont rdf:type owl:Ontology .
+	OPTIONAL {?ont rdfs:label ?label .}
+	OPTIONAL {?ont owl:versionInfo ?versionInfo . }
+	OPTIONAL {?ont dct:description ?description .} 
+}

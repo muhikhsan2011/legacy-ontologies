@@ -1,0 +1,54 @@
+@prefix :        <http://purl.org/viso/bridge/> .
+@prefix annotated:  <http://purl.org/viso/annotated/> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2008/05/skos#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+:     rdf:type owl:Ontology ;
+      dcterms:creator <http://purl.org/viso/JanPolowinski> ;
+      dcterms:description "Stores linking statements to DB-Pedia terms"^^xsd:string ;
+      owl:imports <http://purl.org/viso/bibliography/> , annotated: ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+<http://purl.org/viso/data/DAG>
+      skos:closeMatch <http://dbpedia.org/resource/Directed_acyclic_graph> .
+
+<http://purl.org/viso/data/Graph>
+      skos:closeMatch <http://dbpedia.org/resource/Graph_(data_structure)> .
+
+<http://purl.org/viso/data/Interval_Scale_of_Measurement>
+      skos:closeMatch <http://dbpedia.org/resource/Level_of_measurement#Interval_scale> .
+
+<http://purl.org/viso/data/Linked_Data_Structure>
+      skos:closeMatch <http://dbpedia.org/resource/Linked_data_structure> .
+
+<http://purl.org/viso/data/List>
+      skos:closeMatch <http://dbpedia.org/resource/List_(computing)> .
+
+<http://purl.org/viso/data/Nominal_Scale_of_Measurement>
+      skos:closeMatch <http://dbpedia.org/resource/Scale_(measurement)> .
+
+<http://purl.org/viso/data/Ordinal_Scale_of_Measurement>
+      skos:closeMatch <http://dbpedia.org/resource/Level_of_measurement#Ordinal_scale> .
+
+<http://purl.org/viso/data/Polyarchy>
+      skos:closeMatch <http://dbpedia.org/resource/Polyarchy> .
+
+<http://purl.org/viso/data/Tree>
+      skos:closeMatch <http://dbpedia.org/resource/Tree> .
+
+<http://purl.org/viso/graphic/Containment_Relation>
+      owl:sameAs <http://dbpedia.org/resource/Containment> ;
+      skos:closeMatch <http://dbpedia.org/resource/Containment> .
+
+<http://purl.org/viso/graphic/Labeling_Relation>
+      skos:closeMatch <http://dbpedia.org/resource/Labeling> .
+
+<http://purl.org/viso/graphic/Lineup_Undirected_Relation>
+      skos:closeMatch <http://dbpedia.org/resource/Lineup> .
+
+<http://purl.org/viso/graphic/Superimposition_Relation>
+      skos:closeMatch <http://dbpedia.org/resource/Superimposition> .

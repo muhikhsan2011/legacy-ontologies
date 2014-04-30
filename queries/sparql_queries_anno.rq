@@ -1,0 +1,56 @@
+###########################
+# SPARQL QUERY COLLECTION #
+###########################
+# VISO-ANNO ###############
+###########################
+
+
+# Terms with quotations and sources - BASIC
+###################################################
+SELECT ?subject ?subjectLabel ?p ?source ?sourceContent 
+WHERE {
+	?subject ?p ?source . 
+	?p rdfs:subPropertyOf* bixt:considersSource 
+	OPTIONAL {?subject rdfs:label ?subjectLabel .}
+	OPTIONAL {?source bixt:documentContent ?sourceContent .}
+}
+
+
+
+# Terms with quotations - FLAT (only as details)
+###################################################
+SELECT ?subject ?p ?sourceContent ?authorFamilyName ?documentTitle ?location
+WHERE {
+	?subject ?p ?source . 
+	?p rdfs:subPropertyOf* bixt:considersSource 
+	OPTIONAL {?subject rdfs:label ?subjectLabel .}
+	OPTIONAL {?source bixt:documentContent ?sourceContent .}
+	OPTIONAL {?source bibo:pages ?location .}
+	OPTIONAL {?source bibo:section ?location .}
+	OPTIONAL {
+		?source bixt:isDocumentPartOf ?document .
+		?document dcterms:creator ?oneOfTheAuthors . 
+		?document dcterms:title ?documentTitle . 
+		?oneOfTheAuthors foaf:family_name ?authorFamilyName 
+	}
+}
+
+
+
+
+# Terms with quotations ALL
+###################################################
+SELECT ?subject ?subjectLabel ?p ?source ?sourceContent ?document ?location
+WHERE {
+	?subject ?p ?source . 
+	?p rdfs:subPropertyOf* bixt:considersSource 
+	OPTIONAL {?subject rdfs:label ?subjectLabel .}
+	OPTIONAL {?source bixt:documentContent ?sourceContent .}
+	OPTIONAL {?source bibo:pages ?location .}
+	OPTIONAL {?source bibo:section ?location .}
+	OPTIONAL {
+		?source bixt:isDocumentPartOf ?document .
+		?document dcterms:creator ?oneOfTheAuthors . 
+	}
+}
+

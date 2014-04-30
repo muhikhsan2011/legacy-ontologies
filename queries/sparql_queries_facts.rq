@@ -1,0 +1,52 @@
+###########################
+# SPARQL QUERY COLLECTION #
+###########################
+# VISO-FACTS ##############
+###########################
+
+
+# All statements in viso-facts
+###################################################
+SELECT *
+WHERE { GRAPH <http://purl.org/viso/facts/> {
+    ?subject ?p ?object .
+}}
+
+
+# All restrictions in viso-facts
+###################################################
+SELECT *
+WHERE { GRAPH <http://purl.org/viso/facts/> {
+	?subject rdfs:subClassOf ?restriction.
+    ?restriction a owl:Restriction .
+}}
+
+
+# Some statements in viso-facts
+###################################################
+SELECT *
+WHERE { GRAPH <http://purl.org/viso/facts/> {
+	?subject ?p ?object . 
+    ?subject !(rdf:type | rdf:first | rdf:rest | owl:allValuesFrom | owl:onProperty | rdfs:subClassOf | rdfs:domain | rdfs:range | rdfs:comment | owl:unionOf ) ?object .
+ }
+}
+
+
+# all relations based on class rectrictions (in the default graph)
+###################################################
+SELECT ?subject ?onProperty ?someValuesFrom ?allValuesFrom ?hasValue
+WHERE { GRAPH : {
+    ?subject rdfs:subClassOf ?restriction .
+	?restriction a owl:Restriction . 
+	?restriction owl:onProperty ?onProperty . 
+	OPTIONAL {
+		?restriction owl:someValuesFrom ?someValuesFrom	
+	}
+	OPTIONAL {
+		?restriction owl:allValuesFrom ?allValuesFrom	
+	}
+	OPTIONAL {
+		?restriction owl:hasValue ?hasValue
+	}
+}
+}

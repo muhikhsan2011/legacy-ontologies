@@ -1,0 +1,25 @@
+###########################
+# SPARQL QUERY COLLECTION #
+###########################
+# VISO-AVM/GRAPHICMODEL ###
+###########################
+
+
+# What contains what?
+###################################################
+SELECT DISTINCT ?a ?nameA ?b ?nameB
+WHERE {
+    ?a viso-graphic:contains ?b .
+    ?a :represents ?nameA .
+    ?b :represents ?nameB .
+}
+
+# Delete all GOs
+###################################################
+DELETE  {
+    ?go ?p ?o .
+}
+WHERE {
+    ?go a :GO .
+    ?go ?p ?o .
+}
