@@ -1,0 +1,57 @@
+CONVENTIONS:
+
+- Classnames are spelled Class_with_a_Name
+- Property-Names are spelled property_name
+
+APPLIED ONTOLOGY DESIGN PATTERNS:
+
+#1 
+Problem: Two classes are synonyms
+Solution: We decide on one class and add all labels and comments to one class
+Found at: http://ontologydesignpatterns.org/wiki/Submissions:SynonymOrEquivalence_%28SOE%29 
+
+
+#2
+Problem: Roles have to be modelled - something not simple is something else, but it plays the role of it (can change with time and context)
+Solution: Possible Solution Roles in Context pattern
+Found at: http://ontologydesignpatterns.org/wiki/Community:AcademicRoles
+
+
+#3
+Problem: Something has something else. Should we add a property has_something (probably as subproperty of has) or simply use has and create a local restriction to the class that uses it? In general: clean up partOf-Relations. We have:
+- consist_of
+- 
+
+Solution: ??? at least has_something can often be found. What are the reasoning implications?
+Found at: http://ontologydesignpatterns.org/wiki/Submissions:PartOf -> hier weiter suchen
+
+
+#4
+Problem: Import or simply use external uri?
+Solution: Should we import all the vocabulary that we want to reuse? Or simply reuse the terms. What are the implications? 
+Found: 
+
+#5
+Problem: When to create Existential Restrictions on classes and when use domain-range relationships? 
+Solution: 
+Found: 
+
+#6
+Problem: When to use a class and when an individual. What if we want to state that Color can be used to display ordinal data?
+a) Color(as Individual) ----is_suitable_for-----> Ordinal_Data(as Indivudual??)
+	 - Ordinal_Data has to be an Individual what is strange
+	 + easily to configure using Protégé
+b) 
+Solution: http://www.w3.org/TR/swbp-classes-as-values,  http://ontologydesignpatterns.org/wiki/Community:Representing_Species
+Found: 
+
+#7
+Problem: How to make the Ontology-Editor suggest useful (probable) items to select. Global Domain-Range-Restrictions are not intended for that purpose. Is that right? Is there another means? What about Protege 4?
+Solution: Impoort einer Hilfs-Ontology, die Einschränkungen vornimmt, nur um die Oberfläche der Tools zeitweise anzupassen?!
+Found: 
+
+
+#8
+Problem: Documentation http://www.semanticoverflow.com/questions/2006/what-is-the-best-way-to-annotate-a-class-with-a-citation-pointing-to-an-exact-bib
+Solution: 
+Found: 

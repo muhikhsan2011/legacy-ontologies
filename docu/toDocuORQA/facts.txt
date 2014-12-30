@@ -1,0 +1,34 @@
+[subject]	restriction
+viso-data:Data	has_scale_of_measurement some viso-graphic:Scale_of_Measurement
+viso-data:Nominal_Data	has_scale_of_measurement only viso-graphic:Nominal_Scale_of_Measurement
+viso-data:Ordinal_Data	has_scale_of_measurement only viso-graphic:Ordinal_Scale_of_Measurement
+viso-data:Quantitative_Data	has_scale_of_measurement only viso-graphic:Quantitative_Scale_of_Measurement
+viso-data:Unstructured_Data	has_scale_of_measurement only viso-graphic:Unstructured_Scale_of_Measurement
+viso-graphic:Arbitrary_Spatial_Structure	expresses only viso-data:Unstructured_Data
+viso-graphic:Brightness	suitable_to_visualize only viso-data:Ordinal_Data
+viso-graphic:Brightness	not_suitable_to_visualize only (viso-data:Nominal_Data  or viso-data:Quantitative_Data)
+viso-graphic:Color_Attribute	not_suitable_to_visualize only (viso-data:Ordinal_Data  or viso-data:Quantitative_Data)
+viso-graphic:Color_Attribute	suitable_to_visualize only viso-data:Nominal_Data
+viso-graphic:Containment	expresses only viso-graphic:DAG
+viso-graphic:Interactive_System	supports some viso-graphic:Interaction
+viso-graphic:Labeling	expresses only (viso-data:Nominal_Data  or viso-data:Quantitative_Data)
+viso-graphic:Linking	expresses only viso-graphic:Linked_Data_Structure
+viso-graphic:Object-to-Composite-Metric-Space-Structure	expresses only viso-data:Quantitative_Data
+viso-graphic:Object-to-Distorted-Integral-Metric-Space-Structure	expresses only (viso-graphic:Distorted_Physical_Distance_Data  and viso-graphic:Physical_Directional_Data  and viso-graphic:Physical_Order_Data)
+viso-graphic:Object-to-Distorted-Metric-Space-Structure	expresses only (viso-graphic:Distorted_Numerical_Data  or viso-data:Ordinal_Data)
+viso-graphic:Object-to-Integral-Metric-Space-Structure	expresses only (viso-graphic:Physical_Directional_Data  and viso-graphic:Physical_Order_Data)
+viso-graphic:Object-to-Metric-Space-Structure	expresses only viso-data:Quantitative_Data
+viso-graphic:Ordered_Separation	expresses only viso-data:Ordinal_Data
+viso-graphic:Orientation	suitable_to_visualize only viso-data:Ordinal_Data
+viso-graphic:Orientation	not_suitable_to_visualize only (viso-data:Nominal_Data  or viso-data:Quantitative_Data)
+viso-graphic:Position	suitable_to_visualize only (viso-data:Nominal_Data  or viso-data:Ordinal_Data  or viso-data:Quantitative_Data)
+viso-graphic:Shape	suitable_to_visualize only viso-data:Nominal_Data
+viso-graphic:Shape	not_suitable_to_visualize only (viso-data:Ordinal_Data  or viso-data:Quantitative_Data)
+viso-graphic:Size	suitable_to_visualize only (viso-data:Nominal_Data  or viso-data:Ordinal_Data)
+viso-graphic:Size	not_suitable_to_visualize only viso-data:Quantitative_Data
+viso-graphic:Spatial_Clustering	expresses only (viso-data:Nominal_Data  or viso-graphic:Tree)
+viso-graphic:Texture_Attribute	suitable_to_visualize only viso-data:Ordinal_Data
+viso-graphic:Texture_Attribute	not_suitable_to_visualize only (viso-data:Nominal_Data  or viso-data:Quantitative_Data)
+viso-graphic:Unordered_Separation	expresses only viso-data:Nominal_Data
+viso-graphic:Unordered_Separation	expresses only viso-data:Nominal_Data
+viso-graphic:Visualisation_Pipeline	expresses some viso-graphic:Visualisation

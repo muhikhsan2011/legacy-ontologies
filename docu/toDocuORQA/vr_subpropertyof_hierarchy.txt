@@ -1,0 +1,17 @@
+subPropertyOf hierarchy
+
+has_visual_relation_to
+	has_obj_2_space_relation_to
+		has_obj_2_physical_space_relation_to
+		has_obj_2_other_space_relation_to
+	has_obj_to_obj_relation_to
+		has_spatial_obj_2_obj_relation_to
+		has_other_attribute_obj_2_obj_relation_to
+
+
+has_binary_visual_relation_to (may be this should be separate "facets", however it has to be checked, what are the implications for properties such as relative and same color which have a subproperty relship now)
+
+has_n-ary_visual_relation_to
+
+n-ary-relations-helper-properties (ONLY SERVES AS CONVENIENCE CONTAINER)
+	roles (ONLY SERVES AS CONVENIENCE CONTAINER)

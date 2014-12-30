@@ -1,0 +1,38 @@
+DOI-Resolver:
+
+http://dx.doi.org/ + DOI
+
+e.g.: http://dx.doi.org/10.1109/VISUAL.2004.10
+
+-> shows IEEE website
+
+
+
+
+
+
+Auch interessant - SPARQL Abfrage, scheinbar ohne BIBO nutzung. Kann obige DOI aber nicht finden
+
+http://benosteen.com/sparql
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+select ?y ?z where {
+  <doi:10.1107/S1600536808031681> ?y ?z
+}
+
+
+
+
+http://inkdroid.org/journal/2011/04/25/dois-as-linked-data/
+
+
+
+
+
+
+Konvention zur Annotation mit Quellverweis zu Synonym:
+
+### <Synonymer Term> ###
+Orginal-Text der Quelle, welche den Term beschreibt. .... 

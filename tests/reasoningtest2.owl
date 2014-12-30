@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns="http://purl.org/viso/reasoningtest2#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://purl.org/viso/reasoningtest2">
+  <owl:Ontology rdf:about="">
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Created with TopBraid Composer</owl:versionInfo>
+  </owl:Ontology>
+  <owl:Class rdf:ID="Thing">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Thing</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="OOBExactly2">
+    <owl:disjointWith>
+      <owl:Class rdf:ID="MappingWithOOBExactly0"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Mapping"/>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >2</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="oob"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OOBExactly2</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="OOBSomeThing">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#MappingWithOOBExactly0"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Mapping"/>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Thing"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#oob"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OOBSome thing</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Mapping">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mapping</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="MappingWithNotSomething">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:complementOf>
+          <owl:Restriction>
+            <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:about="#oob"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:complementOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:complementOf>
+          <owl:Restriction>
+            <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:about="#oob"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:complementOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mapping with not something</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Mapping"/>
+  </owl:Class>
+  <owl:Class rdf:about="#MappingWithOOBExactly0">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:complementOf>
+          <owl:Restriction>
+            <owl:someValuesFrom rdf:resource="#Thing"/>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:about="#oob"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:complementOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <owl:disjointWith rdf:resource="#OOBExactly2"/>
+    <rdfs:subClassOf rdf:resource="#Mapping"/>
+    <owl:disjointWith rdf:resource="#OOBSomeThing"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mapping with OOBExactly0</rdfs:label>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="#oob">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >oob</rdfs:label>
+  </owl:ObjectProperty>
+  <Mapping rdf:ID="OOB2Set">
+    <oob>
+      <Thing rdf:ID="OOBSetting2">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >OOBSetting2</rdfs:label>
+      </Thing>
+    </oob>
+    <oob>
+      <Thing rdf:ID="OutOfBoundsSetting">
+        <owl:differentFrom rdf:resource="#OOBSetting2"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Out of bounds setting</rdfs:label>
+      </Thing>
+    </oob>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OOB2Set</rdfs:label>
+    <rdf:type rdf:resource="#MappingWithNotSomething"/>
+  </Mapping>
+  <Mapping rdf:ID="OOBNotSet">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OOBNot set</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </Mapping>
+  <Mapping rdf:ID="OOBSet">
+    <oob rdf:resource="#OutOfBoundsSetting"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OOBSet</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </Mapping>
+  <Thing rdf:ID="Bounds">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bounds</rdfs:label>
+  </Thing>
+  <rdf:Description rdf:ID="MappingWithOOBExactly0_1_1">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mapping with OOBExactly0 1 1</rdfs:label>
+  </rdf:Description>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

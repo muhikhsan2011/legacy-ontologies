@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:reasoningtest="http://www.semanticweb.org/ontologies/2011/5/reasoningtest.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://www.semanticweb.org/ontologies/2011/5/reasoningtest.owl">
+  <owl:Ontology rdf:about=""/>
+  <owl:Class rdf:ID="PropertyMapping">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class rdf:about="http://www.w3.org/2002/07/owl#Thing"/>
+            </owl:someValuesFrom>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:ID="upperBound"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            >0</owl:cardinality>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:ID="outOfBounds"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Mapping"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="MappingWithOutOfBoundsNotSet">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            >0</owl:cardinality>
+            <owl:onProperty rdf:resource="#outOfBounds"/>
+          </owl:Restriction>
+          <owl:Class rdf:about="#Mapping"/>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:subClassOf rdf:resource="#Mapping"/>
+  </owl:Class>
+  <owl:Class rdf:ID="MyThings">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >My things</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="MappingWithBoundsNotSet">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Mapping"/>
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            >0</owl:cardinality>
+            <owl:onProperty rdf:resource="#upperBound"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mapping with bounds not set</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Mapping"/>
+  </owl:Class>
+  <owl:Class rdf:ID="MappingWithOutOfBoundsSet">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+            <owl:onProperty rdf:resource="#outOfBounds"/>
+          </owl:Restriction>
+          <owl:Class rdf:about="#Mapping"/>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:subClassOf rdf:resource="#Mapping"/>
+  </owl:Class>
+  <reasoningtest:Mapping rdf:ID="NeitherSet">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Neither set</rdfs:label>
+  </reasoningtest:Mapping>
+  <reasoningtest:MyThings rdf:ID="Thing_2">
+    <owl:sameAs rdf:resource="#Thing_2"/>
+  </reasoningtest:MyThings>
+  <reasoningtest:Mapping rdf:ID="CompleteMapping">
+    <owl:differentFrom>
+      <reasoningtest:PropertyMapping rdf:ID="ImpossibleMapping">
+        <owl:differentFrom>
+          <reasoningtest:Mapping rdf:ID="OnlyBoundsSetMapping">
+            <reasoningtest:upperBound>
+              <reasoningtest:MyThings rdf:ID="thing">
+                <owl:differentFrom rdf:resource="#Thing_2"/>
+                <owl:differentFrom>
+                  <reasoningtest:MyThings rdf:ID="Thing_3"/>
+                </owl:differentFrom>
+              </reasoningtest:MyThings>
+            </reasoningtest:upperBound>
+          </reasoningtest:Mapping>
+        </owl:differentFrom>
+        <reasoningtest:outOfBounds rdf:resource="#thing"/>
+        <owl:differentFrom rdf:resource="#CompleteMapping"/>
+      </reasoningtest:PropertyMapping>
+    </owl:differentFrom>
+    <reasoningtest:outOfBounds rdf:resource="#thing"/>
+    <reasoningtest:upperBound rdf:resource="#thing"/>
+  </reasoningtest:Mapping>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

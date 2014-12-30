@@ -1,0 +1,38 @@
+@prefix :        <http://purl.org/viso/facts/> .
+@prefix bibo:    <http://purl.org/ontology/bibo/> .
+@prefix bixt:    <http://purl.org/viso/bibo-extension/> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix empiric:  <http://purl.org/viso/facts/empiric/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix viso-data:  <http://purl.org/viso/data/> .
+@prefix viso-graphic:  <http://purl.org/viso/graphic/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+
+
+<http://purl.org/viso/facts/>   rdf:type owl:Ontology ;
+      rdfs:comment "Although no prefixes are used for the ontology itself or or imports, this file is broken, since a linebreak in a string is not recognized correctly(?!)  "^^xsd:string ;
+      owl:imports <http://purl.org/viso/facts/empiric/>  , <http://purl.org/viso/graphic/> .
+
+
+:Appropriateness
+      rdf:type :Graphic_Design_Criteria , owl:NamedIndividual , owl:Thing ;
+      dct:description """ Linebreak follows:
+
+After linebreak"""^^xsd:string .
+
+:Effectiveness
+      rdf:type :Graphic_Design_Criteria , owl:NamedIndividual , owl:Thing .
+
+:Expressiveness
+      rdf:type :Graphic_Design_Criteria , owl:NamedIndividual , owl:Thing ;
+      dct:description "Expressiveness criteria identify graphical languages that express the desired information."^^xsd:string  .
+
+:Graphic_Design_Criteria
+      rdf:type owl:Class ;
+      rdfs:comment "Context: A ranking can be done for  a graphic design criteria. Only then a tool can automatically synthesize effective designs."^^xsd:string ;
+      rdfs:subClassOf viso-graphic:Graphic_Thing .
+

@@ -1,0 +1,19 @@
+subClassOf hierarchy
+
+GraphicMeans:
+
+VisualRelation
+	VisualAttributeRelation
+		VisualAttributeRelationContinuous
+		VisualAttributeRelationDiscrete
+	VisualObject2ObjectRelation
+		VisualObject2ObjectRelationContinuous ?? 
+		VisualObject2ObjectRelationDiscrete ??
+
+	BinaryVisualRelation
+	N-AryVisualRelation
+
+N-AryRelationHelperProperty
+SyntacticRole		 (eigenständig, weil auch noch andere Rollen 
+			vorhanden, die nicht in N-ary-Pattern verwendet
+			 werden)

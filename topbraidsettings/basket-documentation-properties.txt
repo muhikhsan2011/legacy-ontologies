@@ -1,0 +1,15 @@
+http://www.w3.org/2003/06/sw-vocab-status/ns#term_status
+http://www.w3.org/2000/01/rdf-schema#seeAlso
+http://www.w3.org/2008/05/skos#historyNote
+http://www.w3.org/2004/02/skos/core#changeNote
+http://purl.org/viso/bibo-extension/followsSource
+http://www.w3.org/2000/01/rdf-schema#label
+http://purl.org/viso/bibo-extension/considersSource
+http://purl.org/viso/bibo-extension/contradictsSource
+http://purl.org/viso/bibo-extension/synonymLabel
+http://www.w3.org/2004/02/skos/core#editorialNote
+http://www.w3.org/2004/02/skos/core#example
+http://www.w3.org/2004/02/skos/core#related
+http://www.w3.org/2000/01/rdf-schema#comment
+http://purl.org/viso/bibo-extension/documentContent
+http://purl.org/dc/terms/description

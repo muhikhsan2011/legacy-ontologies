@@ -1,0 +1,445 @@
+# Saved by TopBraid on Fri Nov 25 15:31:24 CET 2011
+# baseURI: http://purl.org/viso/facts/
+# imports: http://purl.org/viso/graphic/
+# imports: http://purl.org/viso/facts/empiric/
+
+@prefix :        <http://purl.org/viso/facts/> .
+@prefix bibo:    <http://purl.org/ontology/bibo/> .
+@prefix bixt:    <http://purl.org/viso/bibo-extension/> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix empiric:  <http://purl.org/viso/facts/empiric/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix viso-data:  <http://purl.org/viso/data/> .
+@prefix viso-graphic:  <http://purl.org/viso/graphic/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+viso-data:Data
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty viso-data:has_scale_of_measurement ;
+                owl:someValuesFrom viso-data:Scale_of_Measurement
+              ] .
+
+viso-data:Nominal_Data
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Nominal_Scale_of_Measurement ;
+                owl:onProperty viso-data:has_scale_of_measurement
+              ] .
+
+viso-data:Ordinal_Data
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Ordinal_Scale_of_Measurement ;
+                owl:onProperty viso-data:has_scale_of_measurement
+              ] .
+
+viso-data:Quantitative_Data
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Quantitative_Scale_of_Measurement ;
+                owl:onProperty viso-data:has_scale_of_measurement
+              ] .
+
+viso-data:Unstructured_Data
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Unstructured_Scale_of_Measurement ;
+                owl:onProperty viso-data:has_scale_of_measurement
+              ] .
+
+:     rdf:type owl:Ontology ;
+      rdfs:comment "Contains vocabulary to state facts from (empirical) visualization research, but not the facts themselves. This choice was made, to allow easy exchange of the fact base."^^xsd:string ;
+      owl:imports empiric: , viso-graphic: ;
+      skos:changeNote "Deleted \"offers_visual_value_set\", since this is does not fit the other terms and is not needed at the moment"^^xsd:string .
+
+:Appropriateness
+      rdf:type :Graphic_Design_Criteria , owl:NamedIndividual , owl:Thing ;
+      dct:description "A criteria to judge visualizations. Tradeoff between efforts required for creating a visualization and the benefits. It is used in the visualisation model of Van Wijk and calculates the total costs and overall profit of a visualisation."^^xsd:string ;
+      skos:related :appropriate_to_visualize .
+
+:Effectiveness
+      rdf:type :Graphic_Design_Criteria , owl:NamedIndividual , owl:Thing ;
+      skos:related :has_effectiveness_ranking_value .
+
+:Expressiveness
+      rdf:type :Graphic_Design_Criteria , owl:NamedIndividual , owl:Thing ;
+      dct:description "Expressiveness criteria identify graphical languages that express the desired information."^^xsd:string ;
+      skos:related :expresses .
+
+:Graphic_Design_Criteria
+      rdf:type owl:Class ;
+      rdfs:comment "Context: A ranking can be done for  a graphic design criteria. Only then a tool can automatically synthesize effective designs."^^xsd:string ;
+      rdfs:subClassOf viso-graphic:Graphic_Thing .
+
+:appropriate_to_visualize
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain viso-graphic:GraphicRelation ;
+      rdfs:subPropertyOf :expresses ;
+      dct:description """States that a visual means is not only expressive enough to encode some data classification type (such as ordinal data), but that is also appropriate/acceptable/suitable to encode it. The appropriateness criteria and the facts given in this data set are based on the the Figure \"Fig. 3-26\" in: Jörg Engelhardt, von, „The Language of Graphics“ (Institute for Logic, Language & Computation, University of Amsterdam., 2002). This is in turns based on a figure from MacEachren (p. 272) in: A. M MacEachren, How maps work (Guilford Press New York, 1995).
+"""^^xsd:string ;
+      skos:related :not_appropriate_to_visualize .
+
+:correlates_with
+      rdf:type owl:ObjectProperty , owl:SymmetricProperty ;
+      rdfs:domain viso-data:Data_Variable ;
+      rdfs:range viso-data:Data_Variable ;
+      dct:description "States if two data variables correlate with each other."^^xsd:string .
+
+:depends_on
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "*Resources: [43,41,44]"^^xsd:string ;
+      rdfs:domain viso-graphic:GraphicRelation ;
+      rdfs:range viso-graphic:GraphicRelation ;
+      rdfs:subPropertyOf :influences_interpretation_of .
+
+:expresses
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain viso-graphic:GraphicRelation ;
+      dct:description "The expressiveness criteria and the facts given in this data set are based on the the Figure \"Figure 25 - Expressiveness of Retinal Techniques\" (p. 130) from Jock Mackinlay in „Automating the design of graphical presentations of relational information“, ACM Trans. Graph. 5, Nr. 2 (1986): 110-141 ."^^xsd:string ;
+      skos:example "Visual means \"A\" expresses \"Nominal Data\" means that \"A\" can express nominal data. It does not state something on how well it is suited for this purpose or how effective it is."^^xsd:string ;
+      skos:related :appropriate_to_visualize , :has_effectiveness_ranking_value , :not_appropriate_to_visualize .
+
+:frequently_used_for_domain
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "It was decided not to model if a graphical representation can be used to display data from a given domain, because this would be true for almost every domain. Of course a weighted relation would be more appropriate, but also harder to define exactly."^^xsd:string ;
+      rdfs:domain viso-graphic:Graphic_Representation ;
+      rdfs:range viso-data:Domain ;
+      dct:description "States that a graphical representation is frequently used to represent data from a given domain."^^xsd:string .
+
+:has_effectiveness_ranking_for_nominal_data
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "cf. example of superproperty"^^xsd:string ;
+      rdfs:subPropertyOf :has_effectiveness_ranking_value ;
+      dct:description "Assignes an (ordinal) effectiveness value for encoding nominal data to a visual means. A visual means with a higher number is more effective than one with a lower number."^^xsd:string .
+
+:has_effectiveness_ranking_for_ordinal_data
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "cf. example of superproperty"^^xsd:string ;
+      rdfs:subPropertyOf :has_effectiveness_ranking_value ;
+      dct:description "Assignes an (ordinal) effectiveness value for encoding ordinal data to a visual means. A visual means with a higher number is more effective than one with a lower number."^^xsd:string .
+
+:has_effectiveness_ranking_for_quantitative_data
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "cf. example of superproperty"^^xsd:string ;
+      rdfs:subPropertyOf :has_effectiveness_ranking_value ;
+      dct:description "Assignes an (ordinal) effectiveness value for encoding quantitative data to a visual means. A visual means with a higher number is more effective than one with a lower number."^^xsd:string .
+
+:has_effectiveness_ranking_value
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "Warning: Although the range is float, the ranking value is purely ordinal, i.e. it does not allow statements such as A is 2 times more effective than B. It was therefore also made a supproperty of \"has_ordinal_value\"."^^xsd:string ;
+      rdfs:domain viso-graphic:GraphicRelation ;
+      rdfs:range xsd:float ;
+      rdfs:subPropertyOf viso-data:has_ordinal_value ;
+      dct:description """This property only serves as an \"abstract\" convenience container for the more specific properties that allow assigning effectiveness values to nominal, ordinal and quantitative data. The effectiveness criteria and the facts given in this data set are based on the the Figure \"Fig. 15 -  Ranking of Perceptual Tasks\" (p. 125) from Jock Mackinlay in „Automating the design of graphical presentations of relational information“, ACM Trans. Graph. 5, Nr. 2 (1986): 110-141 .
+"""^^xsd:string ;
+      skos:example "If visual means A has an effectiveness value of 4 and visual means B a value of 8, then visual means B is more effective than A for the given kind of data."^^xsd:string .
+
+:influences_interpretation_of
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "Mackinlay: interacts with"^^xsd:string ;
+      rdfs:domain viso-graphic:GraphicRelation ;
+      rdfs:range viso-graphic:GraphicRelation ;
+      rdfs:seeAlso "interacts_with"^^xsd:string .
+
+:not_appropriate_to_visualize
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain viso-graphic:GraphicRelation ;
+      skos:related :appropriate_to_visualize .
+
+:not_expresses
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain viso-graphic:GraphicRelation ;
+      rdfs:subPropertyOf :not_appropriate_to_visualize .
+
+:not_influences_interpretation_of
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain viso-graphic:Visual_Attribute ;
+      rdfs:range viso-graphic:Visual_Attribute .
+
+:supported_by
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain <http://purl.org/viso/activity/Task> ;
+      rdfs:range viso-graphic:Graphic_Representation .
+
+:supports
+      rdf:type owl:ObjectProperty .
+
+:supports_task
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment """same as realizes? : *References: [4]
+*Example: task is realized through technique"""^^xsd:string ;
+      rdfs:domain viso-graphic:Graphic_Representation ;
+      rdfs:range <http://purl.org/viso/activity/Task> ;
+      owl:inverseOf :supported_by .
+
+viso-graphic:Arbitrary_Spatial_Structure
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Unstructured_Data ;
+                owl:onProperty :expresses
+              ] .
+
+viso-graphic:Area
+      :depends_on viso-graphic:Height , viso-graphic:Width .
+
+viso-graphic:Brightness
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom
+                        [ rdf:type owl:Class ;
+                          owl:unionOf (viso-data:Nominal_Data viso-data:Quantitative_Data)
+                        ] ;
+                owl:onProperty :not_appropriate_to_visualize
+              ] ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Ordinal_Data ;
+                owl:onProperty :appropriate_to_visualize
+              ] ;
+      :influences_interpretation_of
+              viso-graphic:Hue , viso-graphic:Saturation .
+
+viso-graphic:Color
+      viso-graphic:default_neutral_value
+              viso-graphic:Grey .
+
+viso-graphic:Color_Attribute
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Nominal_Data ;
+                owl:onProperty :appropriate_to_visualize
+              ] ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom
+                        [ rdf:type owl:Class ;
+                          owl:unionOf (viso-data:Ordinal_Data viso-data:Quantitative_Data)
+                        ] ;
+                owl:onProperty :not_appropriate_to_visualize
+              ] .
+
+viso-graphic:Containment_Relation
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:DAG ;
+                owl:onProperty :expresses
+              ] .
+
+viso-graphic:GraphicRelation
+      skos:changeNote "This was an owl:Class first, but turned into a rdf:Property, since this describes better the character of visual RELATIONs."^^xsd:string .
+
+viso-graphic:Hue
+      :influences_interpretation_of
+              viso-graphic:Brightness , viso-graphic:Saturation .
+
+viso-graphic:Interactive_Graphic_Representation
+      owl:equivalentClass
+              [ rdf:type owl:Restriction ;
+                owl:onProperty :supports ;
+                owl:someValuesFrom viso-graphic:Interactive_Technique
+              ] .
+
+viso-graphic:Interactive_System
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:onProperty :supports ;
+                owl:someValuesFrom viso-graphic:Interaction
+              ] .
+
+viso-graphic:Labeling_Relation
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom
+                        [ rdf:type owl:Class ;
+                          owl:unionOf (viso-data:Nominal_Data viso-data:Quantitative_Data)
+                        ] ;
+                owl:onProperty :expresses
+              ] .
+
+viso-graphic:Linking_Undirected_Relation
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Linked_Data_Structure ;
+                owl:onProperty :expresses
+              ] .
+
+viso-graphic:Object-to-Composite-Metric-Space-Structure
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Quantitative_Data ;
+                owl:onProperty :expresses
+              ] .
+
+viso-graphic:Object-to-Distorted-Integral-Metric-Space-Structure
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom
+                        [ rdf:type owl:Class ;
+                          owl:intersectionOf (viso-graphic:Distorted_Physical_Distance_Data viso-graphic:Physical_Directional_Data viso-graphic:Physical_Order_Data)
+                        ] ;
+                owl:onProperty :expresses
+              ] .
+
+viso-graphic:Object-to-Distorted-Metric-Space-Structure
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom
+                        [ rdf:type owl:Class ;
+                          owl:unionOf (viso-graphic:Distorted_Numerical_Data viso-data:Ordinal_Data)
+                        ] ;
+                owl:onProperty :expresses
+              ] .
+
+viso-graphic:Object-to-Integral-Metric-Space-Structure
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom
+                        [ rdf:type owl:Class ;
+                          owl:intersectionOf (viso-graphic:Physical_Directional_Data viso-graphic:Physical_Order_Data)
+                        ] ;
+                owl:onProperty :expresses
+              ] .
+
+viso-graphic:Object-to-Metric-Space-Structure
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Quantitative_Data ;
+                owl:onProperty :expresses
+              ] .
+
+viso-graphic:Orientation
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom
+                        [ rdf:type owl:Class ;
+                          owl:unionOf (viso-data:Nominal_Data viso-data:Quantitative_Data)
+                        ] ;
+                owl:onProperty :not_appropriate_to_visualize
+              ] ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Ordinal_Data ;
+                owl:onProperty :appropriate_to_visualize
+              ] .
+
+viso-graphic:Position
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom
+                        [ rdf:type owl:Class ;
+                          owl:unionOf (viso-data:Nominal_Data viso-data:Ordinal_Data viso-data:Quantitative_Data)
+                        ] ;
+                owl:onProperty :appropriate_to_visualize
+              ] .
+
+viso-graphic:Proportional_Division_Relation
+      viso-graphic:uses viso-graphic:Size .
+
+viso-graphic:Saturation
+      :influences_interpretation_of
+              viso-graphic:Brightness , viso-graphic:Hue .
+
+viso-graphic:Separation_Ordered_Relation
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Ordinal_Data ;
+                owl:onProperty :expresses
+              ] .
+
+viso-graphic:Separation_Unordered_Relation
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Nominal_Data ;
+                owl:onProperty :expresses
+              ] ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Nominal_Data ;
+                owl:onProperty :expresses
+              ] .
+
+viso-graphic:Shape
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom
+                        [ rdf:type owl:Class ;
+                          owl:unionOf (viso-data:Ordinal_Data viso-data:Quantitative_Data)
+                        ] ;
+                owl:onProperty :not_appropriate_to_visualize
+              ] ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Nominal_Data ;
+                owl:onProperty :appropriate_to_visualize
+              ] .
+
+viso-graphic:Size
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Quantitative_Data ;
+                owl:onProperty :not_appropriate_to_visualize
+              ] ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom
+                        [ rdf:type owl:Class ;
+                          owl:unionOf (viso-data:Nominal_Data viso-data:Ordinal_Data)
+                        ] ;
+                owl:onProperty :appropriate_to_visualize
+              ] ;
+      :depends_on viso-graphic:Height , viso-graphic:Width ;
+      viso-graphic:default_neutral_value
+              viso-graphic:MediumSize .
+
+viso-graphic:Size_of_Texture_Elements
+      :influences_interpretation_of
+              viso-graphic:Shape_of_Texture_Elements .
+
+viso-graphic:Spatial_Clustering_Relation
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom
+                        [ rdf:type owl:Class ;
+                          owl:unionOf (viso-data:Nominal_Data viso-graphic:Tree)
+                        ] ;
+                owl:onProperty :expresses
+              ] .
+
+viso-graphic:Texture_Attribute
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom viso-data:Ordinal_Data ;
+                owl:onProperty :appropriate_to_visualize
+              ] ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:allValuesFrom
+                        [ rdf:type owl:Class ;
+                          owl:unionOf (viso-data:Nominal_Data viso-data:Quantitative_Data)
+                        ] ;
+                owl:onProperty :not_appropriate_to_visualize
+              ] .
+
+viso-graphic:Time
+      :influences_interpretation_of
+              viso-graphic:Position .
+
+viso-graphic:Visualisation_Pipeline
+      rdfs:comment "evtl. add realtion to visualization here"^^xsd:string .
+
+viso-graphic:Volume
+      :depends_on viso-graphic:Depth , viso-graphic:Height , viso-graphic:Width ;
+      :influences_interpretation_of
+              viso-graphic:Area , viso-graphic:Size .
+
+viso-graphic:x_position
+      viso-graphic:default_neutral_value
+              "0"^^xsd:float .
+
+viso-graphic:y_position
+      viso-graphic:default_neutral_value
+              "0"^^xsd:float .
