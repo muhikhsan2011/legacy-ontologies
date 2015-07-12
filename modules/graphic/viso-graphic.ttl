@@ -35,9 +35,7 @@ viso-graphic:
       rdfs:label "Grafik-Modul der Visualisierungsontologie (VISO)"@de , "Graphic module of the Visualisation Ontology (VISO)"@en ;
       dct:creator <http://purl.org/viso/JanPolowinski> , <http://purl.org/viso/MartinVoigt> ;
       dct:description "The graphic module of VISO defines concepts and relations from the field of graphics and visualisation."^^xsd:string ;
-      owl:imports <http://purl.org/viso/anno/> ,
-      	viso-data: ,
-       	<http://purl.org/viso/system/> ;
+      owl:imports viso-data: ;
       owl:versionInfo "0.5"^^xsd:string ;
       skos:changeNote "Deleted \"belongs_to_visual_attribute\". This was not needed any longer, since visual attribute values are now modelled as instances of visual attributes. -- Jan Polowinski"^^xsd:string , "Deleted Visual_Attribute_Value, since instances of Visual_Attribute are sufficient. -- Jan Polowinski"^^xsd:string .
 
@@ -512,6 +510,14 @@ viso-graphic:Green
               "50"^^xsd:float ;
       viso-graphic:color_rgb
               "#00FF00"^^xsd:string .
+              
+viso-graphic:DarkGreen
+      rdf:type viso-graphic:Color ;
+      rdfs:label "Dark green"^^xsd:string ;
+      viso-graphic:color_hsl_lightness
+              "50"^^xsd:float ;
+      viso-graphic:color_rgb
+              "#00AA00"^^xsd:string .
 
 viso-graphic:Grey
       rdf:type viso-graphic:Color ;
@@ -1689,7 +1695,7 @@ viso-graphic:area
 
 viso-graphic:associative
       rdf:type owl:DatatypeProperty ;
-      rdfs:comment "N. Andrienko und G. Andrienko, â€œExploratory Analysis of Spatial and Temporal Data: A Systematic Approachâ€� (2005). p. 171"^^xsd:string ;
+      rdfs:comment "N. Andrienko und G. Andrienko, Exploratory Analysis of Spatial and Temporal Data: A Systematic Approach (2005). p. 171"^^xsd:string ;
       rdfs:domain viso-graphic:Visual_Attribute ;
       rdfs:range xsd:boolean .
 
@@ -2080,9 +2086,11 @@ viso-graphic:linking_connector
               [ rdf:type owl:Class ;
                 owl:unionOf (viso-graphic:Linking_Undirected_Relation viso-graphic:Linking_Directed_Relation)
               ] ;
+      rdfs:range viso-graphic:Graphic_Object ;
       rdfs:subPropertyOf viso-graphic:n-ary_relation_helper_properties , viso-graphic:syntactic_roles ;
       swstatus:term_status
-              "stable"^^xsd:string .
+              "stable"^^xsd:string ;
+      skos:editorialNote "TMPOFF: domain should be undirected or directed linking as well "^^xsd:string .
 
 viso-graphic:linking_node
       rdf:type viso-graphic:N-AryRelationHelperProperty , viso-graphic:SyntacticRole , owl:ObjectProperty ;
@@ -2119,7 +2127,7 @@ viso-graphic:refers_to
 
 viso-graphic:selective
       rdf:type owl:DatatypeProperty ;
-      rdfs:comment "N. Andrienko und G. Andrienko, â€œExploratory Analysis of Spatial and Temporal Data: A Systematic Approachâ€� (2005). p. 171"^^xsd:string ;
+      rdfs:comment "N. Andrienko und G. Andrienko, Exploratory Analysis of Spatial and Temporal Data: A Systematic Approach (2005). p. 171"^^xsd:string ;
       rdfs:domain viso-graphic:Visual_Attribute ;
       rdfs:range xsd:boolean .
 
